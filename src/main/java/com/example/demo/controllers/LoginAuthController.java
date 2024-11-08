@@ -24,14 +24,8 @@ public class LoginAuthController {
     LoginAuthService loginAuth;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> Login(@RequestBody LoginAuthDto data, @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
+    public ResponseEntity<Object> Login(@RequestBody LoginAuthDto data) {
         var logar = loginAuth.login(data.username(), data.email(), data.password());
-
-        // System.out.println("\n\n\n\n\n\n" + logar);
-
-        if (authorizationHeader != null) {
-            System.out.println(authorizationHeader);
-        }
 
         return logar;
     }

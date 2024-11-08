@@ -29,17 +29,13 @@ public class JwtExample {
     }
 
     // Valida o token verificando a assinatura e a validade do token JWT, se estiver correto, o token será decodificado e suas claims serão retornadas, se ele for inválido, ele retorna null
-    public static DecodedJWT validateToken(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY); // Configura o verificador com o mesmo algoritmo e chave usados antes
+    public static DecodedJWT validateToken(String token) throws JWTVerificationException {
+        Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY); // Configura o verificador com o mesmo algoritmo e chave usados antes
 
-            JWTVerifier verifier = JWT.require(algorithm) 
-                    .build();
+        JWTVerifier verifier = JWT.require(algorithm) 
+                .build();
 
-            return verifier.verify(token); // Verifica o token, se certificando de que ele foi gerado com a mesma chave e que ainda está válido.
-        } catch (JWTVerificationException exception) {
-            System.err.println("Token inválido: " + exception.getMessage());
-            return null;
-        }
+        return verifier.verify(token); // Verifica o token, se certificando de que ele foi gerado com a mesma chave e que ainda está válido.
+        
     }
 }

@@ -37,6 +37,9 @@ public class LoginAuthImpl implements LoginAuthService {
             System.out.println(userOptional);
         }
 
+        if (userOptional == null)
+            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
+
         if (userOptional.isEmpty())
             return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
         
